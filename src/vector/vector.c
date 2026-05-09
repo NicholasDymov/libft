@@ -6,11 +6,11 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 09:44:36 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/08 17:01:45 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/09 09:51:53 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_vector.h"
 #include <errno.h>  // SIZE_MAX
 #include <stdint.h> // SIZE_MAX
 #include <stdlib.h> // malloc()

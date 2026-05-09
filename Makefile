@@ -1,21 +1,23 @@
-NAME := minishell
+NAME := libft.a
 CC ?= cc
-CFLAGS ?= -Wall -Wextra -Werror -lreadline
+CFLAGS ?= -Wall -Wextra -Werror
 
 SRC_DIR := src
 INC_DIR := include
 OBJ_DIR := obj
 
-SRCS := $(wildcard $(SRC_DIR)/*.c)
+CFLAGS += -I$(INC_DIR)
+
+SRCS := $(shell find $(SRC_DIR) -name "*.c")
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEPS := $(OBJS:%.o=%.d)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $^ -o $@
+	@ar rcs $(NAME) $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -I$(INC_DIR) -MMD -MP -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
 
 -include $(DEPS)
 
@@ -31,8 +33,5 @@ re: fclean all
 
 debug: CFLAGS += -g3
 debug: re
-
-sanitize: CFLAGS += -g3 -fsanitize=thread
-sanitize: re
 
 .PHONY: all clean fclean re debug
