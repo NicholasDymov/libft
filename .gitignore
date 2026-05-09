@@ -1,0 +1,7 @@
+.*
+!.gitignore
+*~
+*.o
+*.d
+minishell
+compile_commands.json
