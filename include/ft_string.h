@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector.h                                        :+:      :+:    :+:   */
+/*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/09 09:03:06 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/11 10:17:47 by ndymov           ###   ########.fr       */
+/*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
+/*   Updated: 2026/05/11 17:14:17 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_VECTOR_H
-# define FT_VECTOR_H
+#ifndef FT_STRING_H
+# define FT_STRING_H
 
 # include "libft.h"
-# include <stddef.h>
+# include <stddef.h> // size_t
 
-# ifndef MAX_VECTOR_CAPACITY
-#  define MAX_VECTOR_CAPACITY 0x1000
-# endif
-
-typedef struct s_vector
-{
-	void	**data;
-	size_t	size;
-	size_t	capacity;
-}			t_vector;
-
-t_error		vector_init(t_vector *vec, size_t capacity);
-t_error		vector_push(t_vector *vec, void *new);
-void		*vector_pop(t_vector *vec);
-void		vector_destroy(t_vector *vec, void (*destroy)(void *));
-
+t_error	ft_strdup(char **dst, const char *src);
+int		ft_strcmp(const char *s1, const char *s2);
 #endif
