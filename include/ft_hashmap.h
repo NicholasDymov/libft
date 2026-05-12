@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 08:25:39 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/11 17:13:59 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/12 18:25:04 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@
 #  define HM_CAP_MAX 0x100
 # endif
 
+# ifndef HM_SHORTKEY_SIZE
+#  define HM_SHORTKEY_SIZE 8
+# endif
+
 typedef struct s_entry
 {
+	char			short_key[HM_SHORTKEY_SIZE];
 	char			*key;
 	void			*value;
 	struct s_entry	*next;
@@ -44,8 +49,8 @@ typedef t_error		(*t_hashmap_callback)(const char *key, void *value,
 t_error				hashmap_init(t_hashmap *hm);
 t_error				hashmap_put(t_hashmap *hm, const char *key, void *value);
 void				*hashmap_get(t_hashmap *hm, const char *key);
+void				*hashmap_pop(t_hashmap *hm, const char *key);
 t_error				hashmap_foreach(t_hashmap *hm, t_hashmap_callback callback,
 						void *data);
 void				hashmap_destroy(t_hashmap *hm, void (*destroy)(void *));
-
 #endif

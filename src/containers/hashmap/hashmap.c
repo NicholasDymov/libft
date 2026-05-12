@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 08:27:02 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/11 16:36:34 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/12 19:03:32 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ t_error	hashmap_init(t_hashmap *hm)
 
 t_error	hashmap_put(t_hashmap *hm, const char *key, void *value)
 {
-	t_error		err;
-	t_entry		*entry;
-	uint64_t	key_hash;
+	t_error	err;
+	t_entry	*entry;
+	size_t	idx;
 
-	if (hm == NULL || key == NULL || value == NULL)
+	if (hm == NULL || value == NULL || key == NULL)
 		return (ERR_INVAL);
 	if ((hm->size + 1) * 4 >= hm->capacity * 3)
 	{
@@ -43,15 +43,15 @@ t_error	hashmap_put(t_hashmap *hm, const char *key, void *value)
 		if (err)
 			return (err);
 	}
-	key_hash = hash(key);
-	entry = _hashmap_find_entry(hm->buckets[key_hash % hm->capacity], key);
+	idx = hash(key) % hm->capacity;
+	entry = _hashmap_find_entry(hm->buckets + idx, key);
 	if (entry == NULL)
 	{
-		err = _hashmap_new_entry(key, &entry);
-		if (err)
-			return (err);
-		entry->next = hm->buckets[key_hash];
-		hm->buckets[key_hash] = entry;
+		entry = _hashmap_new_entry(key);
+		if (entry == NULL)
+			return (ERR_NOMEM);
+		entry->next = hm->buckets[idx];
+		hm->buckets[idx] = entry;
 	}
 	entry->value = value;
 	hm->size++;
@@ -60,13 +60,13 @@ t_error	hashmap_put(t_hashmap *hm, const char *key, void *value)
 
 void	*hashmap_get(t_hashmap *hm, const char *key)
 {
-	t_entry		*entry;
-	uint64_t	key_hash;
+	t_entry	*entry;
+	size_t	idx;
 
 	if (hm == NULL || key == NULL)
 		return (NULL);
-	key_hash = hash(key);
-	entry = _hashmap_find_entry(hm->buckets[key_hash], key);
+	idx = hash(key) % hm->capacity;
+	entry = _hashmap_find_entry(hm->buckets + idx, key);
 	if (entry == NULL)
 		return (NULL);
 	return (entry->value);
@@ -74,64 +74,42 @@ void	*hashmap_get(t_hashmap *hm, const char *key)
 
 void	*hashmap_pop(t_hashmap *hm, const char *key)
 {
-	t_entry		*entry;
-	uint64_t	key_hash;
+	size_t	idx;
+	t_entry	*entry;
+	void	*value;
 
 	if (hm == NULL || key == NULL)
 		return (NULL);
-	key_hash = hash(key);
-	entry = _hashmap_find_entry(hm->buckets[key_hash], key);
+	idx = hash(key) % hm->capacity;
+	entry = _hashmap_pop_entry(hm->buckets + idx, key);
 	if (entry == NULL)
 		return (NULL);
-	return (entry->value);
+	value = entry->value;
+	(void)_hashmap_destroy_entry(entry, NULL);
+	return (value);
 }
 
 t_error	hashmap_foreach(t_hashmap *hm, t_hashmap_callback callback, void *data)
 {
-	size_t	i;
-	t_entry	*entry;
-	t_error	err;
+	t_wrapped_callback	wrapped;
+	t_error				err;
 
 	if (hm == NULL || callback == NULL)
 		return (ERR_INVAL);
-	i = 0;
-	while (i < hm->capacity)
-	{
-		entry = hm->buckets[i];
-		while (entry)
-		{
-			err = callback(entry->key, entry->value, data);
-			if (err)
-				return (err);
-			entry = entry->next;
-		}
-		i++;
-	}
+	_wrapped_callback_init(&wrapped, callback, data, NULL);
+	err = _hashmap_foreach(hm, _hashmap_callback_wrapper, &wrapped);
+	if (err)
+		return (err);
 	return (OK);
 }
 
 void	hashmap_destroy(t_hashmap *hm, void (*destroy)(void *))
 {
-	size_t	i;
-	t_entry	*entry;
-	t_entry	*next_entry;
+	t_wrapped_callback	wrapped;
 
 	if (hm == NULL)
 		return ;
-	i = 0;
-	while (i < hm->capacity)
-	{
-		entry = hm->buckets[i];
-		while (entry)
-		{
-			if (destroy != NULL)
-				destroy(entry->value);
-			free(entry->key);
-			next_entry = entry->next;
-			free(entry);
-			entry = next_entry;
-		}
-		i++;
-	}
+	_wrapped_callback_init(&wrapped, NULL, NULL, destroy);
+	(void)_hashmap_foreach(hm, _hashmap_destroy_entry, &wrapped);
 	free(hm->buckets);
 }
