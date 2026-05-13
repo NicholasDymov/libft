@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 08:25:39 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/12 18:25:04 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/13 10:20:03 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@
 
 # ifndef HM_CAP_MAX
 #  define HM_CAP_MAX 0x100
+# endif
+
+# ifndef HM_LOAD_FACTOR_ENUM
+#  define HM_LOAD_FACTOR_ENUM 3
+# endif
+
+# ifndef HM_LOAD_FACTOR_DENOM
+#  define HM_LOAD_FACTOR_DENOM 4
 # endif
 
 # ifndef HM_SHORTKEY_SIZE
@@ -40,6 +48,7 @@ typedef struct s_hashmap
 {
 	t_entry			**buckets;
 	size_t			size;
+	size_t			max_size;
 	size_t			capacity;
 }					t_hashmap;
 

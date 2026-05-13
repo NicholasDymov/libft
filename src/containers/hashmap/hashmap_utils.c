@@ -6,15 +6,21 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 11:10:33 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/12 19:05:45 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/13 10:20:06 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_hash.h"
 #include "ft_hashmap.h"
 #include "ft_hashmap_utils.h"
 #include "ft_memory.h"
 #include "ft_string.h"
 #include <stdlib.h>
+
+size_t	_hashmap_index(const char *key, size_t capacity)
+{
+	return (hash(key) & (capacity - 1));
+}
 
 t_error	_hashmap_resize(t_hashmap *hm, size_t new_capacity)
 {
@@ -30,6 +36,7 @@ t_error	_hashmap_resize(t_hashmap *hm, size_t new_capacity)
 	free(hm->buckets);
 	hm->buckets = new_hm.buckets;
 	hm->capacity = new_hm.capacity;
+	hm->max_size = hm->capacity * HM_LOAD_FACTOR_ENUM / HM_LOAD_FACTOR_DENOM;
 	return (OK);
 }
 
@@ -42,7 +49,7 @@ t_error	_hashmap_foreach(t_hashmap *hm, t_hashmap_callback_internal callback,
 	t_error	err;
 
 	i = 0;
-	while (i < hm->size)
+	while (i < hm->capacity)
 	{
 		entry = hm->buckets[i];
 		while (entry)
@@ -67,13 +74,13 @@ t_entry	*_hashmap_new_entry(const char *key)
 	if (new_entry == NULL)
 		return (NULL);
 	if (ft_strlen(key) < HM_SHORTKEY_SIZE)
-		err = ft_strdup(&new_entry->key, key);
-	else
 	{
 		(void)ft_strcpy(new_entry->short_key, key);
 		new_entry->key = new_entry->short_key;
 		err = OK;
 	}
+	else
+		err = ft_strdup(&new_entry->key, key);
 	if (err)
 		return (free(new_entry), NULL);
 	new_entry->value = NULL;
