@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memory.h                                        :+:      :+:    :+:   */
+/*   ft_string_pool_utils.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/15 14:26:17 by ndymov           ###   ########.fr       */
+/*   Created: 2026/05/13 17:26:59 by ndymov            #+#    #+#             */
+/*   Updated: 2026/05/14 22:12:34 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MEMORY_H
-# define FT_MEMORY_H
+#ifndef FT_STRING_POOL_UTILS_H
+# define FT_STRING_POOL_UTILS_H
 
+# include "ft_string_pool.h"
 # include "libft.h"
-# include <stddef.h>
 
-typedef struct s_memory_pool
-{
-	void	*pool;
-	size_t	size;
-}			t_memory_pool;
+t_error	_sp_grow(t_string_pool *sp, size_t new_capacity);
 
-t_error		*memory_pool_init(t_memory_pool *mp, size_t capacity);
-void		*memory_pool_get(t_memory_pool *mp, size_t n);
-void		*memory_pool_return(t_memory_pool *mp, void *obj);
-
-void		*ft_memcpy(void *restrict dst, void *restrict src, size_t n);
-void		*ft_calloc(size_t n, size_t size);
 #endif

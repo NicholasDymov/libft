@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memory.h                                        :+:      :+:    :+:   */
+/*   ft_string_pool.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/15 14:26:17 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/14 22:12:23 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MEMORY_H
-# define FT_MEMORY_H
+#ifndef FT_STRING_POOL_H
+# define FT_STRING_POOL_H
 
 # include "libft.h"
 # include <stddef.h>
 
-typedef struct s_memory_pool
+# define SP_BLOCK_SIZE 4032 // page size - cache line size
+
+typedef struct s_sp_block
 {
-	void	*pool;
-	size_t	size;
-}			t_memory_pool;
+	char				pool[SP_BLOCK_SIZE];
+	size_t				pos;
+	struct s_sp_block	*next;
+}						t_sp_block;
 
-t_error		*memory_pool_init(t_memory_pool *mp, size_t capacity);
-void		*memory_pool_get(t_memory_pool *mp, size_t n);
-void		*memory_pool_return(t_memory_pool *mp, void *obj);
+typedef struct s_string_pool
+{
+	size_t				used;
+	size_t				capacity;
+	t_sp_block			*current;
+	t_sp_block			*blocks;
+}						t_string_pool;
 
-void		*ft_memcpy(void *restrict dst, void *restrict src, size_t n);
-void		*ft_calloc(size_t n, size_t size);
+t_error					string_pool_init(t_string_pool *sp, size_t capacity);
+
 #endif
