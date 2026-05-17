@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/15 14:26:17 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/17 16:03:38 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,53 @@
 
 # include "libft.h"
 # include <stddef.h>
+# include <stdint.h>
+
+# ifndef CACHE_LINE_SIZE
+#  define CACHE_LINE_SIZE 64
+# endif
+
+# ifndef RAM_PAGE_SIZE
+#  define RAM_PAGE_SIZE 4096
+# endif
+
+# ifndef MP_BLOCK_SIZE
+#  define MP_BLOCK_SIZE 4032 // page size - cache line size
+# endif
+
+# ifndef MP_MAX_CAPACITY
+#  define MP_MAX_CAPACITY 0x1000
+# endif
+
+typedef struct s_mp_block
+{
+	uint8_t				pool[MP_BLOCK_SIZE];
+	struct s_mp_block	*next_block;
+	struct s_mp_block	*prev_block;
+	void				**free_list;
+	void				*malloc_ptr;
+	size_t				used;
+}						t_mp_block;
 
 typedef struct s_memory_pool
 {
-	void	*pool;
-	size_t	size;
-}			t_memory_pool;
+	size_t				used;
+	size_t				capacity;
+	size_t				obj_size;
+	size_t				obj_per_block;
+	t_mp_block			*empty_blocks;
+	t_mp_block			*partial_blocks;
+	t_mp_block			*full_blocks;
+}						t_memory_pool;
 
-t_error		*memory_pool_init(t_memory_pool *mp, size_t capacity);
-void		*memory_pool_get(t_memory_pool *mp, size_t n);
-void		*memory_pool_return(t_memory_pool *mp, void *obj);
+t_error					memory_pool_init(t_memory_pool *mp, size_t capacity,
+							size_t obj_size);
+void					*memory_pool_get(t_memory_pool *mp, size_t n);
+void					*memory_pool_return(t_memory_pool *mp, void *obj);
 
-void		*ft_memcpy(void *restrict dst, void *restrict src, size_t n);
-void		*ft_calloc(size_t n, size_t size);
+void					*ft_memcpy(void *restrict dst, void *restrict src,
+							size_t n);
+void					*ft_calloc(size_t n, size_t size);
+t_error					ft_aligned_alloc(size_t n, size_t alignment,
+							void **aligned_ptr, void **raw_ptr);
 #endif
