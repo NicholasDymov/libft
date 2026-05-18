@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 08:58:33 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/17 15:37:57 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/18 16:57:07 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,28 @@ t_error	memory_pool_init(t_memory_pool *mp, size_t capacity, size_t obj_size)
 	mp->capacity = 0;
 	while (mp->capacity < capacity)
 	{
-		err = __mp_new_block(mp);
+		err = _mp_new_block(mp);
 		if (err)
 			return (err);
 	}
 	return (OK);
 }
 
-void	*memory_pool_get(t_memory_pool *mp, size_t n);
-void	*memory_pool_return(t_memory_pool *mp, void *obj);
+void	*memory_pool_get(t_memory_pool *mp)
+{
+	if (mp->partial_blocks != NULL)
+		return (_mp_block_get(mp->partial_blocks, mp));
+	if (mp->empty_blocks != NULL)
+		return (_mp_block_get(mp->empty_blocks, mp));
+	if (_mp_new_block(mp))
+		return (NULL);
+	return (_mp_block_get(mp->empty_blocks, mp));
+}
+
+void	memory_pool_return(t_memory_pool *mp, void *obj)
+{
+	t_mp_block	*block;
+
+	block = _mp_block_address(obj);
+	_mp_block_return(block, mp, obj);
+}

@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/17 16:03:38 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/18 16:44:26 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 #  define CACHE_LINE_SIZE 64
 # endif
 
-# ifndef RAM_PAGE_SIZE
-#  define RAM_PAGE_SIZE 4096
+# ifndef MP_BLOCK_ALIGNMENT
+#  define MP_BLOCK_ALIGNMENT 4096
 # endif
 
 # ifndef MP_BLOCK_SIZE
@@ -36,8 +36,8 @@
 typedef struct s_mp_block
 {
 	uint8_t				pool[MP_BLOCK_SIZE];
-	struct s_mp_block	*next_block;
-	struct s_mp_block	*prev_block;
+	struct s_mp_block	*next;
+	struct s_mp_block	*prev;
 	void				**free_list;
 	void				*malloc_ptr;
 	size_t				used;
@@ -56,8 +56,8 @@ typedef struct s_memory_pool
 
 t_error					memory_pool_init(t_memory_pool *mp, size_t capacity,
 							size_t obj_size);
-void					*memory_pool_get(t_memory_pool *mp, size_t n);
-void					*memory_pool_return(t_memory_pool *mp, void *obj);
+void					*memory_pool_get(t_memory_pool *mp);
+void					memory_pool_return(t_memory_pool *mp, void *obj);
 
 void					*ft_memcpy(void *restrict dst, void *restrict src,
 							size_t n);
