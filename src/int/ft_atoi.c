@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_pool.c                                      :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 16:47:09 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 10:34:29 by ndymov           ###   ########.fr       */
+/*   Created: 2025/09/06 17:22:26 by ndymov            #+#    #+#             */
+/*   Updated: 2026/05/21 10:36:06 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
-#include "ft_string_pool.h"
-#include "ft_string_pool_utils.h"
+#include "ft_string.h"
 
-t_error	string_pool_init(t_string_pool *sp, size_t capacity)
+int	ft_atoi(const char *nptr)
 {
-	t_error	err;
+	int	num;
+	int	sign;
 
-	if (sp == NULL)
-		return (ERR_INVAL);
-	sp->used = 0;
-	err = _sp_grow(sp, capacity);
-	if (err)
-		return (err);
-	return (OK);
+	num = 0;
+	sign = 1;
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+		sign += -2 * (*nptr++ == '-');
+	while (ft_isdigit(*nptr))
+		num = num * 10 + (*nptr++ - '0');
+	return (sign * num);
 }

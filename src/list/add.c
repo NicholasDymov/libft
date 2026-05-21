@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_pool.c                                      :+:      :+:    :+:   */
+/*   add.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 16:47:09 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 10:34:29 by ndymov           ###   ########.fr       */
+/*   Created: 2026/05/21 10:44:55 by ndymov            #+#    #+#             */
+/*   Updated: 2026/05/21 10:50:50 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
-#include "ft_string_pool.h"
-#include "ft_string_pool_utils.h"
+#include "ft_list.h"
+#include <stddef.h>
 
-t_error	string_pool_init(t_string_pool *sp, size_t capacity)
+void	ft_lstadd_back(t_list **lst, t_list *new_elem)
 {
-	t_error	err;
+	t_list	*last;
 
-	if (sp == NULL)
-		return (ERR_INVAL);
-	sp->used = 0;
-	err = _sp_grow(sp, capacity);
-	if (err)
-		return (err);
-	return (OK);
+	if (lst == NULL || new_elem == NULL)
+		return ;
+	last = ft_lstlast(*lst);
+	if (last == NULL)
+		*lst = new_elem;
+	else
+		last->next = new_elem;
+}
+
+void	ft_lstadd_front(t_list **lst, t_list *new_elem)
+{
+	if (new_elem == NULL)
+		return ;
+	new_elem->next = *lst;
+	*lst = new_elem;
 }

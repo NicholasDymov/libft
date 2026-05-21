@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_pool.c                                      :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 16:47:09 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 10:34:29 by ndymov           ###   ########.fr       */
+/*   Created: 2025/09/06 08:58:26 by ndymov            #+#    #+#             */
+/*   Updated: 2025/09/06 14:32:32 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
-#include "ft_string_pool.h"
-#include "ft_string_pool_utils.h"
+#include "libft.h"
 
-t_error	string_pool_init(t_string_pool *sp, size_t capacity)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_error	err;
-
-	if (sp == NULL)
-		return (ERR_INVAL);
-	sp->used = 0;
-	err = _sp_grow(sp, capacity);
-	if (err)
-		return (err);
-	return (OK);
+	if (s1 == s2 || n == 0)
+		return (0);
+	while (--n && *s1 && (unsigned char)*s1 == (unsigned char)*s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (((unsigned char)*s1 - (unsigned char)*s2));
 }

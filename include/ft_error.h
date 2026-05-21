@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_pool.c                                      :+:      :+:    :+:   */
+/*   ft_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 16:47:09 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 10:34:29 by ndymov           ###   ########.fr       */
+/*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
+/*   Updated: 2026/05/21 09:02:47 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
-#include "ft_string_pool.h"
-#include "ft_string_pool_utils.h"
+#ifndef FT_ERROR_H
+# define FT_ERROR_H
 
-t_error	string_pool_init(t_string_pool *sp, size_t capacity)
+typedef enum e_error
 {
-	t_error	err;
+	OK,
+	ERR_INVAL,
+	ERR_NOMEM,
+	ERR_EOF,
+	ERR_UNCLOSED_QUOTE,
+	ERR_PARSE,
+}	t_error;
 
-	if (sp == NULL)
-		return (ERR_INVAL);
-	sp->used = 0;
-	err = _sp_grow(sp, capacity);
-	if (err)
-		return (err);
-	return (OK);
-}
+#endif

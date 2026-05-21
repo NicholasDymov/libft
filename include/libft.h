@@ -5,22 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/20 16:13:43 by ndymov           ###   ########.fr       */
+/*   Created: 2025/08/28 17:09:24 by ndymov            #+#    #+#             */
+/*   Updated: 2026/05/21 10:34:49 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-typedef enum e_error
-{
-	OK,
-	ERR_INVAL,
-	ERR_NOMEM,
-	ERR_EOF,
-	ERR_UNCLOSED_QUOTE,
-	ERR_PARSE,
-}	t_error;
+# include "ft_memory.h"
+# include "ft_string.h"
 
 #endif

@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_pool.c                                      :+:      :+:    :+:   */
+/*   bzero.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 16:47:09 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 10:34:29 by ndymov           ###   ########.fr       */
+/*   Created: 2025/08/31 11:57:50 by ndymov            #+#    #+#             */
+/*   Updated: 2026/05/21 09:19:46 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
-#include "ft_string_pool.h"
-#include "ft_string_pool_utils.h"
+#include "ft_memory.h"
 
-t_error	string_pool_init(t_string_pool *sp, size_t capacity)
+void	*ft_bzero(void *s, size_t n)
 {
-	t_error	err;
-
-	if (sp == NULL)
-		return (ERR_INVAL);
-	sp->used = 0;
-	err = _sp_grow(sp, capacity);
-	if (err)
-		return (err);
-	return (OK);
+	return (ft_memset(s, 0, n));
 }

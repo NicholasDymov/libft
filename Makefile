@@ -1,6 +1,7 @@
 NAME := libft.a
 CC ?= cc
 CFLAGS ?= -Wall -Wextra -Werror
+LONG_BIT ?= 64
 
 SRC_DIR := src
 INC_DIR := include
@@ -34,4 +35,17 @@ re: fclean all
 debug: CFLAGS += -g3
 debug: re
 
+speed: CFLAGS += -DSPEED
+speed: re
+
+o1: CFLAGS += -O1
+o1: re
+
+o2: CFLAGS += -O2
+o2: re
+
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC) $(SRC_BONUS)
+	gcc -nostartfiles -shared -o libft.so $(OBJ) $(OBJ_BONUS)
+	
 .PHONY: all clean fclean re debug

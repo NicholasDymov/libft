@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_pool.c                                      :+:      :+:    :+:   */
+/*   char.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 16:47:09 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 10:34:29 by ndymov           ###   ########.fr       */
+/*   Created: 2026/05/21 09:50:48 by ndymov            #+#    #+#             */
+/*   Updated: 2026/05/21 10:07:21 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
-#include "ft_string_pool.h"
-#include "ft_string_pool_utils.h"
-
-t_error	string_pool_init(t_string_pool *sp, size_t capacity)
+int	ft_isspace(char c)
 {
-	t_error	err;
+	return (c == ' ' || (unsigned)c - '\t' < 5);
+}
 
-	if (sp == NULL)
-		return (ERR_INVAL);
-	sp->used = 0;
-	err = _sp_grow(sp, capacity);
-	if (err)
-		return (err);
-	return (OK);
+int	ft_isascii(int c)
+{
+	return ((unsigned)c < 128);
+}
+
+int	ft_isdigit(int c)
+{
+	return ((unsigned)c - '0' < 10);
+}
+
+int	ft_isalpha(int c)
+{
+	return (((unsigned)c | 32) - 'a' < 26);
+}
+
+int	ft_isprint(int c)
+{
+	return ((unsigned)c - 32 < 95);
 }
