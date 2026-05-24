@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 09:34:27 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 11:02:14 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/24 12:05:39 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	*ft_memset(void *s, int c, size_t n)
 
 	p = s;
 	while (n--)
-		*(char *)p++ = (char)c;
+		*(unsigned char *)p++ = (unsigned char)c;
 	return (s);
 }

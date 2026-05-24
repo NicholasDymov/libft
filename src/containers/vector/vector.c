@@ -6,10 +6,11 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 09:44:36 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/20 17:39:08 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/24 12:02:21 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_int.h"
 #include "ft_memory.h"
 #include "ft_vector.h"
 #include <stdint.h> // SIZE_MAX
@@ -17,37 +18,37 @@
 
 static t_error	vector_resize(t_vector *vec, size_t new_capacity)
 {
-	size_t	cap;
-	void	**new_data;
+	char	*new_data;
 
-	if (new_capacity > MAX_VECTOR_CAPACITY)
+	new_capacity = po2_up(new_capacity);
+	if (new_capacity == 0 || sizet_mult_overflow(vec->obj_size, new_capacity))
+		return (ERR_INVAL);
+	if (vec->obj_size * new_capacity > MAX_VECTOR_MEMORY)
 		return (ERR_NOMEM);
-	cap = 1;
-	while (cap < new_capacity)
-		cap <<= 1;
-	if (cap > MAX_VECTOR_CAPACITY)
-		cap = MAX_VECTOR_CAPACITY;
-	new_data = malloc(sizeof(void *) * cap);
+	if (new_capacity == vec->capacity)
+		return (OK);
+	new_data = malloc(vec->obj_size * new_capacity);
 	if (new_data == NULL)
 		return (ERR_NOMEM);
-	vec->capacity = cap;
+	vec->capacity = new_capacity;
 	if (vec->data != NULL)
 	{
-		(void)ft_memcpy(new_data, vec->data, sizeof(void *) * vec->size);
+		(void)ft_memcpy(new_data, vec->data, vec->obj_size * vec->size);
 		free(vec->data);
 	}
 	vec->data = new_data;
 	return (OK);
 }
 
-t_error	vector_init(t_vector *vec, size_t capacity)
+t_error	vector_init(t_vector *vec, size_t obj_size, size_t capacity)
 {
 	t_error	err;
 
-	if (vec == NULL)
+	if (vec == NULL || obj_size == 0 || sizet_mult_overflow(obj_size, capacity))
 		return (ERR_INVAL);
 	vec->size = 0;
 	vec->capacity = 0;
+	vec->obj_size = obj_size;
 	vec->data = NULL;
 	if (capacity == 0)
 		return (OK);
@@ -61,7 +62,7 @@ t_error	vector_push(t_vector *vec, void *new)
 {
 	t_error	err;
 
-	if (vec == NULL)
+	if (vec == NULL || new == NULL)
 		return (ERR_INVAL);
 	if (vec->size == vec->capacity)
 	{
@@ -69,32 +70,56 @@ t_error	vector_push(t_vector *vec, void *new)
 		if (err)
 			return (err);
 	}
-	vec->data[vec->size++] = new;
+	ft_memcpy(vec->data + vec->obj_size * vec->size, new, vec->obj_size);
+	vec->size++;
 	return (OK);
 }
 
-void	*vector_pop(t_vector *vec)
+t_error	vector_pop(t_vector *vec)
 {
-	if (vec == NULL)
-		return (NULL);
-	if (vec->size == 0)
-		return (NULL);
-	return (vec->data[--vec->size]);
+	if (vec == NULL || vec->size == 0)
+		return (ERR_INVAL);
+	vec->size--;
+	if (vec->size < vec->capacity >> 2)
+		(void)vector_resize(vec, vec->capacity >> 1);
+	return (OK);
 }
 
-void	vector_destroy(t_vector *vec, void (*destroy)(void *))
+void	*vector_back(t_vector *vec)
+{
+	if (vec == NULL || vec->size == 0)
+		return (NULL);
+	return (vec->data + vec->obj_size * (vec->size - 1));
+}
+
+void	*vector_get(t_vector *vec, size_t pos)
+{
+	if (vec == NULL || pos >= vec->size)
+		return (NULL);
+	return (vec->data + vec->obj_size * pos);
+}
+
+t_error	vector_foreach(t_vector *vec, t_error (*callback)(void *data))
 {
 	size_t	i;
+	t_error	err;
 
-	if (vec == NULL)
-		return ;
-	if (destroy == NULL)
-	{
-		free(vec->data);
-		return ;
-	}
+	if (vec == NULL || callback == NULL)
+		return (ERR_INVAL);
 	i = 0;
 	while (i < vec->size)
-		destroy(vec->data[i++]);
+	{
+		err = callback(vec->data + i * vec->obj_size);
+		if (err)
+			return (err);
+		i++;
+	}
+	return (OK);
+}
+
+void	vector_destroy(t_vector *vec)
+{
+	if (vec == NULL)
+		return ;
 	free(vec->data);
 }
