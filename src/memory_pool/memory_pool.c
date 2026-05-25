@@ -6,12 +6,11 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 08:58:33 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/18 16:57:07 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/25 13:52:16 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_int.h"
-#include "ft_memory.h"
 #include "ft_memory_pool_utils.h"
 
 t_error	memory_pool_init(t_memory_pool *mp, size_t capacity, size_t obj_size)

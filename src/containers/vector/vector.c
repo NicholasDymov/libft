@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 09:44:36 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/25 08:06:00 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/25 09:38:12 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,13 @@ char	*vector_to_string(t_vector *vec)
 		ft_memcpy(str, vec->data, size);
 	str[size] = '\0';
 	return (str);
+}
+
+void	vector_clear(t_vector *vec)
+{
+	if (vec == NULL)
+		return ;
+	vec->size = 0;
 }
 
 void	vector_destroy(t_vector *vec)
