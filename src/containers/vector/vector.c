@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 09:44:36 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/24 12:02:21 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/25 08:06:00 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,23 @@ t_error	vector_foreach(t_vector *vec, t_error (*callback)(void *data))
 		i++;
 	}
 	return (OK);
+}
+
+char	*vector_to_string(t_vector *vec)
+{
+	char	*str;
+	size_t	size;
+
+	if (vec == NULL)
+		return (NULL);
+	size = vec->obj_size * vec->size;
+	str = malloc(size + 1);
+	if (str == NULL)
+		return (NULL);
+	if (size > 0)
+		ft_memcpy(str, vec->data, size);
+	str[size] = '\0';
+	return (str);
 }
 
 void	vector_destroy(t_vector *vec)
