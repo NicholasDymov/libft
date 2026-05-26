@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 08:58:33 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/26 12:05:29 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/26 15:11:04 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_error	memory_pool_init(t_memory_pool *mp, size_t capacity, size_t obj_size)
 
 void	memory_pool_destroy(t_memory_pool *mp)
 {
+	if (mp == NULL)
+		return ;
 	_mp_block_destroy(mp->empty_blocks);
 	_mp_block_destroy(mp->partial_blocks);
 	_mp_block_destroy(mp->full_blocks);

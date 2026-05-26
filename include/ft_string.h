@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/26 10:33:34 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/26 15:11:38 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,4 @@ char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
-char	*ft_utoa(uint64_t n);
 #endif
