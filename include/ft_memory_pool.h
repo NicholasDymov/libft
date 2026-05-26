@@ -6,14 +6,14 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 11:01:08 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/26 09:02:58 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MEMORY_POOL_H
 # define FT_MEMORY_POOL_H
 
-# include "libft.h"
+# include "ft_error.h"
 # include <stddef.h>
 # include <stdint.h>
 

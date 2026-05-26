@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 10:39:32 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/24 09:37:38 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/26 10:46:26 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <stddef.h>
 # include <stdint.h>
+
+char		*ft_itoa(int n);
+char		*ft_utoa(uint64_t n);
+
+size_t		ft_itobuff(int n, char *buff);
+size_t		ft_utobuff(uint64_t n, char *buff);
 
 uint64_t	po2_up(uint64_t x);
 uint64_t	po2_down(uint64_t x);

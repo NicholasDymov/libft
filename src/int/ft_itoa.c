@@ -6,11 +6,10 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:19:50 by ndymov            #+#    #+#             */
-/*   Updated: 2025/09/10 17:27:08 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/26 10:46:39 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <limits.h>
 #include <stdlib.h>
 
