@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/26 09:02:58 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/26 11:55:34 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_memory_pool
 
 t_error					memory_pool_init(t_memory_pool *mp, size_t capacity,
 							size_t obj_size);
+void					memory_pool_destroy(t_memory_pool *mp);
 void					*memory_pool_get(t_memory_pool *mp);
 void					memory_pool_return(t_memory_pool *mp, void *obj);
 

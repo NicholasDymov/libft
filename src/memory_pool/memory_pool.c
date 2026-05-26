@@ -6,12 +6,13 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 08:58:33 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/25 13:52:16 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/26 12:05:29 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_int.h"
 #include "ft_memory_pool_utils.h"
+#include <stdlib.h>
 
 t_error	memory_pool_init(t_memory_pool *mp, size_t capacity, size_t obj_size)
 {
@@ -40,6 +41,18 @@ t_error	memory_pool_init(t_memory_pool *mp, size_t capacity, size_t obj_size)
 			return (err);
 	}
 	return (OK);
+}
+
+void	memory_pool_destroy(t_memory_pool *mp)
+{
+	_mp_block_destroy(mp->empty_blocks);
+	_mp_block_destroy(mp->partial_blocks);
+	_mp_block_destroy(mp->full_blocks);
+	mp->empty_blocks = NULL;
+	mp->partial_blocks = NULL;
+	mp->full_blocks = NULL;
+	mp->used = 0;
+	mp->capacity = 0;
 }
 
 void	*memory_pool_get(t_memory_pool *mp)

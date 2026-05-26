@@ -6,12 +6,13 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 15:10:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/18 17:24:37 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/26 12:23:10 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_memory.h"
 #include "ft_memory_pool_utils.h"
+#include <stdlib.h>
 
 t_error	_mp_new_block(t_memory_pool *mp)
 {
@@ -50,15 +51,20 @@ void	_mp_block_intrusive_free_list(t_mp_block *block, t_memory_pool *mp)
 	block->free_list = (void **)&block->pool;
 }
 
-void	_mp_block_move(t_mp_block *block, t_mp_block **list)
+void	_mp_block_move(t_mp_block *block, t_mp_block **src_list,
+		t_mp_block **dst_list)
 {
 	if (block->prev != NULL)
 		block->prev->next = block->next;
+	else
+		*src_list = block->next;
 	if (block->next != NULL)
 		block->next->prev = block->prev;
-	if (*list != NULL)
-		(*list)->prev = block;
-	*list = block;
+	if (*dst_list != NULL)
+		(*dst_list)->prev = block;
+	block->next = *dst_list;
+	block->prev = NULL;
+	*dst_list = block;
 }
 
 void	*_mp_block_address(void *obj)
@@ -78,20 +84,32 @@ void	*_mp_block_get(t_mp_block *block, t_memory_pool *mp)
 	obj = block->free_list;
 	block->free_list = *obj;
 	if (block->used + 1 == mp->obj_per_block)
-		_mp_block_move(block, &mp->full_blocks);
+		_mp_block_move(block, &mp->partial_blocks, &mp->full_blocks);
 	else if (block->used == 0)
-		_mp_block_move(block, &mp->partial_blocks);
+		_mp_block_move(block, &mp->empty_blocks, &mp->partial_blocks);
 	block->used++;
 	return (obj);
 }
 
 void	_mp_block_return(t_mp_block *block, t_memory_pool *mp, void *obj)
 {
-	obj = block->free_list;
-	block->free_list = &obj;
+	*(void **)obj = block->free_list;
+	block->free_list = (void **)obj;
 	if (block->used == 1)
-		_mp_block_move(block, &mp->empty_blocks);
+		_mp_block_move(block, &mp->partial_blocks, &mp->empty_blocks);
 	else if (block->used == mp->obj_per_block)
-		_mp_block_move(block, &mp->partial_blocks);
+		_mp_block_move(block, &mp->full_blocks, &mp->partial_blocks);
 	block->used--;
+}
+
+void	_mp_block_destroy(t_mp_block *block)
+{
+	t_mp_block	*next_block;
+
+	while (block != NULL)
+	{
+		next_block = block->next;
+		free(block->malloc_ptr);
+		block = next_block;
+	}
 }
