@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc.c                                            :+:      :+:    :+:   */
+/*   str_alloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 10:17:30 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/27 10:46:28 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/27 19:47:07 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@ char	*ft_strjoin(char const *s1, char const *s2, char sep)
 		return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	if (len1 + 2 > SIZE_MAX - len2)
+	if (len1 + 1 + (sep != 0) > SIZE_MAX - len2)
 		return (NULL);
-	res = malloc(len1 + len2 + 2);
+	res = malloc(len1 + len2 + 1 + (sep != 0));
 	if (res == NULL)
 		return (NULL);
 	ft_strlcpy(res, s1, len1 + 1);
-	res[len1] = sep;
-	ft_strlcpy(res + len1 + 1, s2, len2 + 1);
+	if (sep != '\0')
+		res[len1] = sep;
+	ft_strlcpy(res + len1 + (sep != 0), s2, len2 + 1);
 	return (res);
 }
 
