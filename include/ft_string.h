@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/26 15:11:38 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/27 11:27:21 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,18 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 
 size_t	ft_strlen(const char *str);
+
 char	*ft_strcpy(char *restrict dst, const char *restrict src);
 char	*ft_strncpy(char *restrict dst, const char *restrict src, size_t n);
-t_error	ft_strdup(char **dst, const char *src);
-int		ft_strcmp(const char *s1, const char *s2);
-
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+
+int		ft_strcmp(const char *s1, const char *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
+t_error	ft_strdup(char **dst, const char *src);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2, char sep);
