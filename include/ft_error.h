@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/27 19:36:26 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/27 20:15:41 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef enum e_error
 	ERR_PIPE,
 	ERR_FORK,
 	ERR_WAIT,
+	ERR_ARG,
+	ERR_HOME,
 	ERR_EOF,
 	ERR_UNCLOSED_QUOTE,
 	ERR_PARSE,
