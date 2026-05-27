@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/27 12:15:20 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/27 19:36:26 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@ typedef enum e_error
 	OK,
 	ERR_INVAL,
 	ERR_NOMEM,
+	ERR_WRITE,
+	ERR_OPEN,
+	ERR_CLOSE,
+	ERR_DUP,
 	ERR_ACCESS,
 	ERR_EXECVE,
+	ERR_GETCWD,
 	ERR_PIPE,
 	ERR_FORK,
 	ERR_WAIT,
