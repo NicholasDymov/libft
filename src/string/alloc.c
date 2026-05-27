@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 10:17:30 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/25 14:52:31 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/27 10:46:28 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ char	*ft_strjoin(char const *s1, char const *s2, char sep)
 	res = malloc(len1 + len2 + 2);
 	if (res == NULL)
 		return (NULL);
-	ft_strlcpy(res, s1, len1);
+	ft_strlcpy(res, s1, len1 + 1);
 	res[len1] = sep;
-	ft_strlcpy(res + len1 + 1, s2, len2);
-	res[len1 + len2 + 1] = '\0';
+	ft_strlcpy(res + len1 + 1, s2, len2 + 1);
 	return (res);
 }
 

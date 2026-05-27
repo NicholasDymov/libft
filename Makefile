@@ -45,7 +45,7 @@ o2: CFLAGS += -O2
 o2: re
 
 so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC) $(SRC_BONUS)
-	gcc -nostartfiles -shared -o libft.so $(OBJ) $(OBJ_BONUS)
-	
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS)
+	gcc -nostartfiles -shared -o libft.so $(OBJS)
+
 .PHONY: all clean fclean re debug

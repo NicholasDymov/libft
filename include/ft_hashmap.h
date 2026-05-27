@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 08:25:39 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 10:31:49 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/27 10:45:00 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <stddef.h>
 
 # ifndef HM_CAP_START
-#  define HM_CAP_START 1024
+#  define HM_CAP_START 64
 # endif
 
 # ifndef HM_CAP_MAX
-#  define HM_CAP_MAX 0x100
+#  define HM_CAP_MAX 0x10000
 # endif
 
 # ifndef HM_LOAD_FACTOR_ENUM

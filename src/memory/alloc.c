@@ -6,10 +6,11 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 09:21:39 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 09:41:48 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/27 10:59:59 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_int.h"
 #include "ft_memory.h"
 #include <limits.h>
 #include <stdint.h>
@@ -17,15 +18,12 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	no_mult_of;
 	size_t	mem_size;
 	void	*mem;
 
 	if (nmemb == 0 || size == 0)
 		return (malloc(0));
-	no_mult_of = ((size_t)1 << (CHAR_BIT * sizeof(size_t) / 2)) - 1;
-	if ((nmemb >= no_mult_of || size >= no_mult_of) && nmemb > (size_t)-1
-		/ size)
+	if (sizet_mult_overflow(nmemb, size))
 		return (NULL);
 	mem_size = nmemb * size;
 	mem = malloc(mem_size);

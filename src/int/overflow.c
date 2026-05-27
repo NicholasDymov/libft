@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   overflow.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 17:09:24 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/27 10:50:56 by ndymov           ###   ########.fr       */
+/*   Created: 2026/05/27 10:54:11 by ndymov            #+#    #+#             */
+/*   Updated: 2026/05/27 10:55:42 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <limits.h>
+#include <stddef.h>
+#include <stdint.h>
 
-# include "ft_error.h"
-# include "ft_file.h"
-# include "ft_hash.h"
-# include "ft_hashmap.h"
-# include "ft_int.h"
-# include "ft_list.h"
-# include "ft_memory.h"
-# include "ft_memory_pool.h"
-# include "ft_string.h"
-# include "ft_vector.h"
-
-#endif
+int	sizet_mult_overflow(size_t x, size_t y)
+{
+	if (x > SIZE_MAX / y)
+		return (1);
+	return (0);
+}
