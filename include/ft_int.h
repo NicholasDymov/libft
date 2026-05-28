@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 10:39:32 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/26 11:36:22 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/28 21:51:41 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 int			ft_atoi(const char *s);
 int64_t		ft_atou(const char *s);
+
+int			ft_safe_atoi(const char *s, int *n);
+int64_t		ft_safe_atou(const char *s, int *n);
 
 char		*ft_itoa(int n);
 char		*ft_utoa(uint64_t n);
