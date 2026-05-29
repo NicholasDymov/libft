@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/28 21:54:03 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/29 14:27:50 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ typedef enum e_error
 	OK,
 	ERR_INVAL,
 	ERR_NOMEM,
+	ERR_QUOTE,
+	ERR_BRACE,
+	ERR_PARSE,
+	ERR_PIPE,
+	ERR_FORK,
 	ERR_WRITE,
 	ERR_OPEN,
 	ERR_CLOSE,
@@ -26,15 +31,10 @@ typedef enum e_error
 	ERR_EXECVE,
 	ERR_GETCWD,
 	ERR_CHDIR,
-	ERR_PIPE,
-	ERR_FORK,
 	ERR_WAIT,
 	ERR_ARG,
 	ERR_HOME,
 	ERR_EOF,
-	ERR_QUOTE,
-	ERR_BRACE,
-	ERR_PARSE,
 	ERR_ENV,
 	ERR_TOO_MANY,
 	ERR_NUMERIC,
