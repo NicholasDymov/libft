@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:22:26 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/29 18:22:01 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/30 01:49:29 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,34 @@ t_error	ft_safe_atoi(const char *s, int *n)
 	if (*s != '\0')
 		return (ERR_INVAL);
 	*n = (int)(res * sign);
+	return (OK);
+}
+
+t_error	ft_safe_atoll(const char *s, int64_t *n)
+{
+	int			sign;
+	uint64_t	res;
+
+	res = 0;
+	sign = 1;
+	while (ft_isspace(*s))
+		s++;
+	if (*s == '+' || *s == '-')
+		sign = ((*s++ == '+') << 1) - 1;
+	if (!ft_isdigit(*s))
+		return (ERR_INVAL);
+	while (ft_isdigit(*s))
+	{
+		if (res > (uint64_t)INT64_MAX / 10 || (res == (uint64_t)INT64_MAX / 10
+				&& 1U * (*s - '0') > (uint64_t)INT64_MAX % 10 + (sign == -1)))
+			return (ERR_OVERFLOW);
+		res = res * 10 + (*s++ - '0');
+	}
+	while (ft_isspace(*s))
+		s++;
+	if (*s != '\0')
+		return (ERR_INVAL);
+	*n = res * sign;
 	return (OK);
 }
 
