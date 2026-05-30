@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/30 00:25:24 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/05/30 05:48:40 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef enum e_error
 	ERR_DUP,
 	ERR_ACCESS,
 	ERR_NOENT,
+	ERR_ISDIR,
 	ERR_NOCMD,
 	ERR_EXECVE,
 	ERR_GETCWD,
