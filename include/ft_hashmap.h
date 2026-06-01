@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 08:25:39 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/27 10:45:00 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/06/01 13:08:34 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef t_error		(*t_hashmap_callback)(const char *key, void *value,
 
 t_error				hashmap_init(t_hashmap *hm);
 t_error				hashmap_put(t_hashmap *hm, const char *key, void *value);
-void				*hashmap_get(t_hashmap *hm, const char *key);
-void				*hashmap_pop(t_hashmap *hm, const char *key);
+t_error				hashmap_get(t_hashmap *hm, const char *key, void **value);
+t_error				hashmap_pop(t_hashmap *hm, const char *key, void **value);
 t_error				hashmap_foreach(t_hashmap *hm, t_hashmap_callback callback,
 						void *data);
 void				hashmap_destroy(t_hashmap *hm, void (*destroy)(void *));

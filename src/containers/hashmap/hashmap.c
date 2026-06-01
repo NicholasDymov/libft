@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 08:27:02 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/30 17:06:41 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/06/01 13:19:42 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_error	hashmap_put(t_hashmap *hm, const char *key, void *value)
 	t_entry	*entry;
 	size_t	idx;
 
-	if (hm == NULL || value == NULL || key == NULL)
+	if (hm == NULL || key == NULL)
 		return (ERR_INVAL);
 	if (hm->size + 1 >= hm->max_size)
 	{
@@ -59,34 +59,34 @@ t_error	hashmap_put(t_hashmap *hm, const char *key, void *value)
 	return (OK);
 }
 
-void	*hashmap_get(t_hashmap *hm, const char *key)
+t_error	hashmap_get(t_hashmap *hm, const char *key, void **value)
 {
 	t_entry	*entry;
 	size_t	idx;
 
 	if (hm == NULL || key == NULL)
-		return (NULL);
+		return (ERR_INVAL);
 	idx = _hashmap_index(key, hm->capacity);
 	entry = _hashmap_find_entry(hm->buckets + idx, key);
 	if (entry == NULL)
-		return (NULL);
-	return (entry->value);
+		return (ERR_KEY);
+	*value = entry->value;
+	return (OK);
 }
 
-void	*hashmap_pop(t_hashmap *hm, const char *key)
+t_error	hashmap_pop(t_hashmap *hm, const char *key, void **value)
 {
 	size_t	idx;
 	t_entry	*entry;
-	void	*value;
 
 	if (hm == NULL || key == NULL)
-		return (NULL);
+		return (ERR_INVAL);
 	idx = _hashmap_index(key, hm->capacity);
 	entry = _hashmap_pop_entry(hm->buckets + idx, key);
 	if (entry == NULL)
-		return (NULL);
-	value = entry->value;
+		return (ERR_KEY);
+	*value = entry->value;
 	(void)_hashmap_destroy_entry(entry, NULL);
 	hm->size--;
-	return (value);
+	return (OK);
 }
