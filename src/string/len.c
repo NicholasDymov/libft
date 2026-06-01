@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:57:50 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/24 12:10:12 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/06/01 13:42:20 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ size_t	ft_strlen(const char *s)
 {
 	const char	*p = s;
 
+	if (s == NULL)
+		return (0);
 	while (*p)
 		p++;
 	return (p - s);
