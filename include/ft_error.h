@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/06/01 13:05:50 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/06/01 15:55:18 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef enum e_error
 	ERR_CHDIR,
 	ERR_WAIT,
 	ERR_ARG,
-	ERR_HOME,
+	ERR_NOTSET,
 	ERR_EOF,
 	ERR_ENV,
 	ERR_TOO_MANY,
