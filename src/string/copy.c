@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:57:50 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/27 11:32:45 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/06/01 10:34:02 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,17 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		*p++ = *src++;
 	*p = '\0';
 	return (p - dst + ft_strlen(src));
+}
+
+size_t	ft_bufflcpy(char *dst, const char *src, size_t size)
+{
+	char	*p;
+
+	if (size == 0)
+		return (0);
+	p = dst;
+	while (--size && *src)
+		*p++ = *src++;
+	*p = '\0';
+	return (size);
 }
