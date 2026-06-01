@@ -35,6 +35,9 @@ re: fclean all
 debug: CFLAGS += -g3
 debug: re
 
+sanitize: CFLAGS += -g3 -fsanitize=address,undefined
+sanitize: re
+
 speed: CFLAGS += -DSPEED
 speed: re
 
