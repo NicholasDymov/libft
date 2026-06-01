@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 08:27:02 by ndymov            #+#    #+#             */
-/*   Updated: 2026/06/01 13:19:42 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/06/01 13:31:08 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_error	hashmap_get(t_hashmap *hm, const char *key, void **value)
 		return (ERR_INVAL);
 	idx = _hashmap_index(key, hm->capacity);
 	entry = _hashmap_find_entry(hm->buckets + idx, key);
+	*value = NULL;
 	if (entry == NULL)
 		return (ERR_KEY);
 	*value = entry->value;
@@ -83,6 +84,7 @@ t_error	hashmap_pop(t_hashmap *hm, const char *key, void **value)
 		return (ERR_INVAL);
 	idx = _hashmap_index(key, hm->capacity);
 	entry = _hashmap_pop_entry(hm->buckets + idx, key);
+	*value = NULL;
 	if (entry == NULL)
 		return (ERR_KEY);
 	*value = entry->value;
