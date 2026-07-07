@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 17:07:45 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/30 17:09:57 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/07 11:43:11 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	*vector_get(t_vector *vec, size_t pos)
 	return (vec->data + vec->obj_size * pos);
 }
 
-t_error	vector_foreach(t_vector *vec, t_error (*callback)(void *data))
+t_error	vector_foreach(t_vector *vec, t_error (*callback)(void *data,
+			void *user_data), void *data)
 {
 	size_t	i;
 	t_error	err;
@@ -45,7 +46,7 @@ t_error	vector_foreach(t_vector *vec, t_error (*callback)(void *data))
 	i = 0;
 	while (i < vec->size)
 	{
-		err = callback(vec->data + i * vec->obj_size);
+		err = callback(vec->data + i * vec->obj_size, data);
 		if (err)
 			return (err);
 		i++;
