@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 09:03:06 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/07 11:42:40 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/09 16:44:17 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ typedef struct s_vector
 
 t_error		vector_init(t_vector *vec, size_t obj_size, size_t capacity);
 t_error		vector_push(t_vector *vec, void *new);
-t_error		vector_pop(t_vector *vec);
+t_error		vector_pop(t_vector *vec, void (*destroy)(void *));
 t_error		vector_foreach(t_vector *vec, t_error (*callback)(void *data,
 					void *user_data), void *data);
 void		*vector_back(t_vector *vec);
 void		*vector_get(t_vector *vec, size_t pos);
 char		*vector_to_string(t_vector *vec);
-void		vector_clear(t_vector *vec);
-void		vector_destroy(t_vector *vec);
+void		vector_clear(t_vector *vec, void (*destroy)(void *));
+void		vector_destroy(t_vector *vec, void (*destroy)(void *));
 
 #endif

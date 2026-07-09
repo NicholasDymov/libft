@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/06/01 10:33:43 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/09 20:31:30 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_STRING_H
 
 # include "ft_error.h"
+# include "ft_vector.h"
 # include <stddef.h>
 # include <stdint.h>
 
@@ -46,8 +47,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2, char sep);
 char	*ft_strtrim(char const *s1, char const *set);
-char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+
+t_error	ft_split(t_vector *vec, const char *s, char sep);
+t_error	ft_split_words(t_vector *vec, const char *s, int (*issep)(char));
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 17:07:45 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/07 11:43:11 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/09 16:32:32 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,23 @@
 #include "ft_vector.h"
 #include <stdlib.h>
 
-void	vector_clear(t_vector *vec)
+void	vector_clear(t_vector *vec, void (*destroy)(void *))
 {
+	size_t	i;
+
 	if (vec == NULL)
 		return ;
+	if (destroy == NULL)
+	{
+		vec->size = 0;
+		return ;
+	}
+	i = 0;
+	while (i < vec->size)
+	{
+		destroy(vec->data + vec->obj_size * i);
+		i++;
+	}
 	vec->size = 0;
 }
 

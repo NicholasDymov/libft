@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 09:44:36 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/30 17:09:22 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/09 16:47:44 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,34 @@ t_error	vector_push(t_vector *vec, void *new)
 	return (OK);
 }
 
-t_error	vector_pop(t_vector *vec)
+t_error	vector_pop(t_vector *vec, void (*destroy)(void *))
 {
 	if (vec == NULL || vec->size == 0)
 		return (ERR_INVAL);
+	if (destroy != NULL)
+		destroy(vec->data + vec->obj_size * (vec->size - 1));
 	vec->size--;
 	if (vec->size < vec->capacity >> 2)
 		(void)vector_resize(vec, vec->capacity >> 1);
 	return (OK);
 }
 
-void	vector_destroy(t_vector *vec)
+void	vector_destroy(t_vector *vec, void (*destroy)(void *))
 {
+	size_t	i;
+
 	if (vec == NULL)
 		return ;
+	if (destroy == NULL)
+	{
+		free(vec->data);
+		return ;
+	}
+	i = 0;
+	while (i < vec->size)
+	{
+		destroy(vec->data + vec->obj_size * i);
+		i++;
+	}
 	free(vec->data);
 }
