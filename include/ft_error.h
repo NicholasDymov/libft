@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/09 15:02:15 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/09 15:21:44 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ typedef enum e_error
 	ERR_KEY,
 	ERR_EXIT,
 	ERR_MLX,
-	ERR_NOFILE,
-	ERR_NOCAM,
-	ERR_NOLIGHT,
-	ERR_NOAMB,
+	ERR_NO_FILE,
+	ERR_NO_CAM,
+	ERR_NO_LIGHT,
+	ERR_NO_AMB,
+	ERR_EXTRA_CAM,
+	ERR_EXTRA_LIGHT,
+	ERR_EXTRA_AMB,
 	ERR_TYPE,
 	ERR_COORD,
 	ERR_RGB,
