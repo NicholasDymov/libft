@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hash.h                                          :+:      :+:    :+:   */
+/*   array.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/11 09:05:25 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/11 10:52:13 by ndymov           ###   ########.fr       */
+/*   Created: 2026/07/09 13:01:41 by ndymov            #+#    #+#             */
+/*   Updated: 2026/07/09 13:07:16 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_HASH_H
-# define FT_HASH_H
+#include <stdlib.h>
 
-# include <stdint.h> // uint64_t
+void	free_array(void **arr, void (*destroy)(void *))
+{
+	void	**ptr;
 
-uint64_t	hash(const char *str);
-
-#endif
+	if (arr == NULL)
+		return ;
+	if (destroy == NULL)
+	{
+		free(arr);
+		return ;
+	}
+	ptr = arr;
+	while (*ptr)
+	{
+		destroy(*ptr);
+		ptr++;
+	}
+	free(arr);
+}

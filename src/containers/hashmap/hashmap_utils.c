@@ -6,14 +6,14 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 11:10:33 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/30 17:05:37 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/09 13:11:05 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_hash.h"
 #include "ft_hashmap.h"
 #include "ft_hashmap_utils.h"
 #include "ft_memory.h"
+#include "ft_utils.h"
 #include <stdlib.h>
 
 size_t	_hashmap_index(const char *key, size_t capacity)

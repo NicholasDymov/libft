@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash.c                                             :+:      :+:    :+:   */
+/*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/11 09:04:30 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/09 13:10:54 by ndymov           ###   ########.fr       */
+/*   Created: 2026/05/11 09:05:25 by ndymov            #+#    #+#             */
+/*   Updated: 2026/07/09 13:09:59 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
+#ifndef FT_UTILS_H
+# define FT_UTILS_H
 
-uint64_t	hash(const char *str)
-{
-	uint64_t			hash;
-	int					c;
-	const unsigned char	*ptr;
+# include <stdint.h>
 
-	ptr = (unsigned char *)str;
-	hash = 5381;
-	c = *ptr;
-	while (c)
-	{
-		hash = (hash << 5) + hash + c;
-		c = *(++ptr);
-	}
-	return (hash);
-}
+uint64_t	hash(const char *str);
+void		free_array(void **arr, void (*destroy)(void *));
+
+#endif
