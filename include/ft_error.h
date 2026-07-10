@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/09 15:21:44 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/10 12:19:55 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef enum e_error
 	ERR_EXTRA_LIGHT,
 	ERR_EXTRA_AMB,
 	ERR_TYPE,
+	ERR_PARAMS,
 	ERR_COORD,
 	ERR_RGB,
 	ERR_FOV,
