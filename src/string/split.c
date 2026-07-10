@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:22:50 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/10 11:52:29 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/10 14:44:59 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_error	ft_split(t_vector *vec, const char *s, char sep, size_t maxsplit)
 	return (OK);
 }
 
-t_error	ft_split_words(t_vector *vec, const char *s, int (*issep)(char),
+t_error	ft_split_words(t_vector *vec, const char *s, int (*issep)(int),
 		size_t maxsplit)
 {
 	const char	*next;

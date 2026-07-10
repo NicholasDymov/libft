@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/10 11:29:37 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/10 14:44:46 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 t_error	ft_split(t_vector *vec, const char *s, char sep, size_t maxsplit);
-t_error	ft_split_words(t_vector *vec, const char *s, int (*issep)(char),
+t_error	ft_split_words(t_vector *vec, const char *s, int (*issep)(int),
 			size_t maxsplit);
 
 #endif
