@@ -4,5 +4,4 @@
 *.o
 *.d
 *.a
-minishell
 compile_commands.json
