@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 10:39:32 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/30 01:39:48 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/07/10 09:21:09 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include "ft_error.h"
 # include <stddef.h>
 # include <stdint.h>
+
+int64_t		ft_min(int64_t x, int64_t y);
+int64_t		ft_max(int64_t x, int64_t y);
+uint64_t	ft_umin(uint64_t x, uint64_t y);
+uint64_t	ft_umax(uint64_t x, uint64_t y);
 
 int			ft_atoi(const char *s);
 uint64_t	ft_atou(const char *s);
