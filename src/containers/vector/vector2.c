@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 17:07:45 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/09 16:32:32 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/08/31 17:19:44 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	vector_clear(t_vector *vec, void (*destroy)(void *))
 	vec->size = 0;
 }
 
-void	*vector_back(t_vector *vec)
+void	*vector_back(const t_vector *vec)
 {
 	if (vec == NULL || vec->size == 0)
 		return (NULL);
 	return (vec->data + vec->obj_size * (vec->size - 1));
 }
 
-void	*vector_get(t_vector *vec, size_t pos)
+void	*vector_get(const t_vector *vec, size_t pos)
 {
 	if (vec == NULL || pos >= vec->size)
 		return (NULL);
