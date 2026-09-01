@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 09:48:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/10 12:19:55 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/09/01 11:41:29 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_error
 	ERR_PARSE,
 	ERR_PIPE,
 	ERR_FORK,
+	ERR_READ,
 	ERR_WRITE,
 	ERR_OPEN,
 	ERR_CLOSE,
@@ -38,6 +39,7 @@ typedef enum e_error
 	ERR_ARG,
 	ERR_NOTSET,
 	ERR_EOF,
+	ERR_NEWLINE,
 	ERR_ENV,
 	ERR_TOO_MANY,
 	ERR_NUMERIC,
