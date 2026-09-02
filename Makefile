@@ -38,17 +38,11 @@ debug: re
 sanitize: CFLAGS += -g3 -fsanitize=address,undefined
 sanitize: re
 
-speed: CFLAGS += -DSPEED
-speed: re
-
-o1: CFLAGS += -O1
-o1: re
-
-o2: CFLAGS += -O2
-o2: re
+fast: CFLAGS += -Ofast -flto -march=native -fomit-frame-pointer -DNDEBUG -DSPEED
+fast: re
 
 so:
 	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS)
 	gcc -nostartfiles -shared -o libft.so $(OBJS)
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug sanitize fast

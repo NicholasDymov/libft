@@ -6,25 +6,27 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 14:47:32 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/10 15:02:17 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/09/01 12:37:38 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
+#include "ft_float.h"
+#include <float.h>
 
-float	ft_atof(const char *s);
-double	ft_atod(const char *s);
-
-t_error	ft_safe_atof(const char *s, float *x)
+float	ft_atof(const char *s)
 {
-	(void)s;
-	(void)x;
-	return (OK);
+	float	x;
+
+	x = 0.0f;
+	(void)ft_safe_atof(s, &x);
+	return (x);
 }
 
-t_error	ft_safe_atod(const char *s, double *x)
+double	ft_atod(const char *s)
 {
-	(void)s;
-	(void)x;
-	return (OK);
+	double	x;
+
+	x = 0.0;
+	(void)ft_safe_atod(s, &x);
+	return (x);
 }

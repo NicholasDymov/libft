@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 10:39:32 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/10 14:53:05 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/09/02 09:26:38 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@ char	*ft_dtoa(double x);
 
 size_t	ft_ftobuff(float x, char *buff, size_t n);
 size_t	ft_dtobuff(double x, char *buff, size_t n);
+
+float	ft_powf(float base, int exponent);
+double	ft_pow(double base, int exponent);
 
 #endif
