@@ -4,4 +4,6 @@
 *.o
 *.d
 *.a
+*.out
+*.so
 compile_commands.json

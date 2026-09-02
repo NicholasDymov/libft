@@ -6,11 +6,13 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 09:50:48 by ndymov            #+#    #+#             */
-/*   Updated: 2026/05/21 10:07:21 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/09/02 12:40:55 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(char c)
+#include "ft_string.h"
+
+int	ft_isspace(int c)
 {
 	return (c == ' ' || (unsigned)c - '\t' < 5);
 }

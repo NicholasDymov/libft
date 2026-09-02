@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_file.h"
 #include "ft_string.h"
 #include <limits.h>
 #include <unistd.h>

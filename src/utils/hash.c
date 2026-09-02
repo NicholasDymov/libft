@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_utils.h"
 #include <stdint.h>
 
 uint64_t	hash(const char *str)

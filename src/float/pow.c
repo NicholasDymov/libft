@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_float.h"
 #include <limits.h>
 #include <math.h>
 #include <stddef.h>

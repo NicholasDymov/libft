@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_utils.h"
 #include <stdlib.h>
 
 void	free_array(void **arr, void (*destroy)(void *))

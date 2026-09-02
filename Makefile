@@ -7,7 +7,7 @@ SRC_DIR := src
 INC_DIR := include
 OBJ_DIR := obj
 
-CFLAGS += -I$(INC_DIR)
+CFLAGS += -I$(INC_DIR) -DFT_LONG_BIT=$(LONG_BIT)
 
 SRCS := $(shell find $(SRC_DIR) -name "*.c")
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -28,7 +28,7 @@ clean:
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) libft.so a.out
 
 re: fclean all
 
@@ -38,11 +38,11 @@ debug: re
 sanitize: CFLAGS += -g3 -fsanitize=address,undefined
 sanitize: re
 
-fast: CFLAGS += -Ofast -flto -march=native -fomit-frame-pointer -DNDEBUG -DSPEED
+fast: CFLAGS += -Ofast -fno-finite-math-only -flto -march=native -fomit-frame-pointer -DNDEBUG -DFT_SPEED
 fast: re
 
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS)
-	gcc -nostartfiles -shared -o libft.so $(OBJS)
+so: CFLAGS += -fPIC
+so: re
+	@$(CC) -nostartfiles -shared -o libft.so $(OBJS)
 
-.PHONY: all clean fclean re debug sanitize fast
+.PHONY: all clean fclean re debug sanitize fast so

@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_int.h"
 #include <limits.h>
 #include <stddef.h>
 #include <stdint.h>
 
 int	sizet_mult_overflow(size_t x, size_t y)
 {
-	if (x > SIZE_MAX / y)
+	if (y != 0 && x > SIZE_MAX / y)
 		return (1);
 	return (0);
 }

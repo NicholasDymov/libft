@@ -6,14 +6,15 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:57:50 by ndymov            #+#    #+#             */
-/*   Updated: 2026/06/01 13:42:20 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/09/02 12:35:09 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_string.h"
 #include <stddef.h>
 #include <stdint.h>
 
-#ifndef SPEED
+#ifndef FT_SPEED
 
 size_t	ft_strlen(const char *s)
 {
@@ -29,10 +30,10 @@ size_t	ft_strlen(const char *s)
 
 /* Magic numbers are bad, mkay? Don't be bad boys, don't use magic numbers. */
 
-# if LONG_BIT == 32
+# if FT_LONG_BIT == 32
 #  define MASK01 0x01010101
 #  define MASK80 0x80808080
-# elif LONG_BIT == 64
+# elif FT_LONG_BIT == 64
 #  define MASK01 0x0101010101010101
 #  define MASK80 0x8080808080808080
 # else
