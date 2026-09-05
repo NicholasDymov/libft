@@ -6,7 +6,7 @@
 /*   By: ndymov <ndymov@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 10:40:18 by ndymov            #+#    #+#             */
-/*   Updated: 2026/07/10 14:44:46 by ndymov           ###   ########.fr       */
+/*   Updated: 2026/09/05 08:25:11 by ndymov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 
 size_t	ft_strlen(const char *str);
+
+int		ft_str_startswith(const char *str, const char *prefix);
+int		ft_str_endswith(const char *str, const char *suffix);
 
 char	*ft_strcpy(char *restrict dst, const char *restrict src);
 char	*ft_strncpy(char *restrict dst, const char *restrict src, size_t n);
